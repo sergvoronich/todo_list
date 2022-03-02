@@ -1,0 +1,119 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 800px;
+  background-color: aquamarine;
+  padding: 20px;
+}
+
+.add-block {
+  display: flex;
+  padding: 20px;
+  width: 500px;
+}
+
+.add-block input {
+  flex: 1 1 auto;
+  padding: 5px;
+}
+
+.todos-container {
+  width: 500px;
+  min-height: 100px;
+  overflow: auto;
+}
+
+.todo {
+  margin-bottom: 10px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+}
+
+.todo p {
+  display: inline-block;
+  flex: 1 1 auto;
+  margin: 5px;
+}
+
+.todo button {
+  height: 20px;
+  margin: 0 10px 0 10px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.todo input {
+  margin-left: 10px;
+}
+
+.remove-block {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  margin-top: 20px;
+}
+
+.edit-title {
+  flex: 1 1 auto;
+  border: 0;
+  margin: 5px;
+  text-align: center;
+  outline: none;
+  font-size: inherit;
+}
+
+.edit-title:active {
+  border: 0;
+}
+
+.progress-bar {
+  position: relative;
+  display: flex;
+  width: 150px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 2px;
+}
+
+.progress-bar__item {
+  width: 100%;
+  height: 100%;
+}
+
+.progress-bar__text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2px;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.progress-bar__text span {
+  font-weight: bold;
+}
+
+.blue {
+  background-color: aqua;
+  order: -1;
+}
+
+.completed {
+  text-decoration: line-through;
+  background-color: rgb(245, 245, 245);
+}
