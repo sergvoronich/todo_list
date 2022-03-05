@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { REMOVE, CHECK } from '../constants';
+import { removeTodoAction, checkAction } from '../store/index';
 
 function Todo({ item, index }) {
   const [editMode, setEditMode] = useState(false);
@@ -10,7 +10,7 @@ function Todo({ item, index }) {
   const dispatch = useDispatch();
 
   const removeTodo = (id) => {
-    dispatch({ type: REMOVE, id });
+    dispatch(removeTodoAction(id));
   };
 
   const titleChangeHandler = () => {
@@ -19,14 +19,20 @@ function Todo({ item, index }) {
   };
 
   const checkChangeHandler = () => {
-    dispatch({ type: CHECK, index });
+    dispatch(checkAction(index));
+  };
+
+  const className = () => {
+    if (item.completed) return 'todo completed';
+    return 'todo';
   };
 
   return (
-    <div className="todo">
+    <div className={className()}>
       <input
         type="checkbox"
         onChange={checkChangeHandler}
+        checked={item.completed}
       />
       {editMode
         ? (

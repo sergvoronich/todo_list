@@ -1,42 +1,47 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 import {
-  todos, ADD, REMOVE, REMOVEALLDONE, CHECK,
+  todos, ADD, REMOVE, REMOVEALLDONE, CHECK, GET,
 } from '../constants';
 
 const reducer = (state = { todos }, action = '') => {
-  if (action.type === ADD) {
-    if (action.newEntry.title !== '') {
+  switch (action.type) {
+    case ADD:
+      if (action.newEntry.title !== '') {
+        return { todos: [...state.todos, action.newEntry] };
+      }
+      break;
+    case GET:
+      return { todos: [...state.todos, ...action.payload] };
+    case REMOVE:
       return {
-        todos: [...state.todos, action.newEntry],
+        todos: state.todos.filter((item) => item.id !== action.id),
       };
-    }
-    return state;
-  }
-
-  if (action.type === REMOVE) {
-    return {
-      todos: state.todos.filter((item) => item.id !== action.id),
-    };
-  }
-
-  if (action.type === REMOVEALLDONE) {
-    return {
-      todos: state.todos.filter((item) => !item.completed),
-    };
-  }
-
-  if (action.type === CHECK) {
-    return {
-      todos: state.todos.map((item, index) => {
-        if (index === action.index) return { ...item, completed: !item.completed };
-        return item;
-      }),
-    };
+    case REMOVEALLDONE:
+      return {
+        todos: state.todos.filter((item) => !item.completed),
+      };
+    case CHECK:
+      return {
+        todos: state.todos.map((item, index) => {
+          if (index === action.index) return { ...item, completed: !item.completed };
+          return item;
+        }),
+      };
+    default:
+      return state;
   }
 
   return state;
 };
 
-const store = createStore(reducer);
+export const addTodoAction = (newEntry) => ({ type: ADD, newEntry });
+export const getTodosAction = (payload) => ({ type: GET, payload });
+export const removeTodoAction = (id) => ({ type: REMOVE, id });
+export const removeAllDoneAction = () => ({ type: REMOVEALLDONE });
+export const checkAction = (index) => ({ type: CHECK, index });
+
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export default store;

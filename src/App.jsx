@@ -1,6 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD, REMOVEALLDONE } from './constants';
+import { addTodoAction, removeAllDoneAction } from './store/index';
+import { fetchTodos } from './asyncActions/todos';
 import Todo from './components/Todo';
 import './App.css';
 
@@ -24,13 +25,17 @@ function App() {
       title: newTodo,
       completed: false,
     };
-    dispatch({ type: ADD, newEntry });
+    dispatch(addTodoAction(newEntry));
     setNewTodo('');
   };
 
   const removeAllDoneHandler = () => {
-    dispatch({ type: REMOVEALLDONE });
+    dispatch(removeAllDoneAction());
   };
+
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, []);
 
   return (
     <div className="App">

@@ -1,3 +1,11 @@
+* {
+  font-family: 'Fira Sans', serif;
+}
+
+body {
+  min-width: 800px;
+}
+
 .App {
   text-align: center;
   display: flex;
@@ -12,6 +20,7 @@
   width: 800px;
   background-color: aquamarine;
   padding: 20px;
+  border-radius: 5px;
 }
 
 .add-block {
@@ -23,6 +32,7 @@
 .add-block input {
   flex: 1 1 auto;
   padding: 5px;
+  margin-right: 3px;
 }
 
 .todos-container {
@@ -37,6 +47,14 @@
   display: flex;
   align-items: center;
   border-radius: 2px;
+}
+
+.todo.completed {
+  background-color: rgba(222, 255, 222, 0.5);
+}
+
+.todo.completed p {
+  text-decoration: line-through;
 }
 
 .todo p {
@@ -99,7 +117,7 @@ button:hover {
   position: absolute;
   left: 0;
   right: 0;
-  top: -2px;
+  top: 2px;
   margin: 0;
   font-size: 0.9rem;
 }
@@ -109,11 +127,6 @@ button:hover {
 }
 
 .blue {
-  background-color: aqua;
+  background-color: yellow;
   order: -1;
-}
-
-.completed {
-  text-decoration: line-through;
-  background-color: rgb(245, 245, 245);
 }
