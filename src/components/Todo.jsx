@@ -60,7 +60,8 @@ function Todo({ item, index }) {
 export default Todo;
 
 Todo.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.number, title: PropTypes.string, completed: PropTypes.bool,
+  }).isRequired,
   index: PropTypes.number.isRequired,
 };

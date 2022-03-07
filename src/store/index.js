@@ -1,5 +1,4 @@
 import { applyMiddleware, createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import {
   todos, ADD, REMOVE, REMOVEALLDONE, CHECK, GET,
@@ -42,6 +41,6 @@ export const removeTodoAction = (id) => ({ type: REMOVE, id });
 export const removeAllDoneAction = () => ({ type: REMOVEALLDONE });
 export const checkAction = (index) => ({ type: CHECK, index });
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
